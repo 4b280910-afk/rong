@@ -233,7 +233,7 @@ font-size: 14px;
 font-weight: 600;
 }
 
-/* ==================== 交付及退費政策 新增樣式 ==================== */
+/* ==================== 交付及退費政策 樣式 (優化版) ==================== */
 .policy-accordion {
 margin-top: 15px;
 background: rgba(255, 255, 255, 0.02);
@@ -258,6 +258,7 @@ font-size: 15px;
 font-weight: 600;
 text-align: left;
 transition: background 0.3s;
+outline: none;
 }
 
 .policy-trigger:hover {
@@ -280,17 +281,17 @@ color: #8e8e9c;
 transition: transform 0.3s ease;
 }
 
-/* 折疊內容 */
+/* 折疊內容核心（改用 height 動態控制，速度更絲滑） */
 .policy-content {
-max-height: 0;
+height: 0;
 overflow: hidden;
-transition: max-height 0.3s ease-out;
+transition: height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 text-align: left;
 background: rgba(0, 0, 0, 0.15);
 }
 
 .policy-inner-scroll {
-padding: 0 20px 24px;
+padding: 10px 20px 24px;
 font-size: 13.5px;
 color: #c5c5d2;
 line-height: 1.6;
@@ -326,14 +327,9 @@ margin-bottom: 6px;
 color: #ffffff;
 }
 
-/* 展開狀態 class (由 JS 控制) */
+/* 箭頭旋轉狀態 */
 .policy-accordion.active .arrow-icon {
 transform: rotate(180deg);
-}
-
-.policy-accordion.active .policy-content {
-max-height: 1200px; /* 給予足夠容納內容的最大高度 */
-transition: max-height 0.4s ease-in;
 }
 
 .footer {
@@ -412,7 +408,7 @@ letter-spacing: 0.5px;
 
 </div>
 
-<!-- ==================== 新增：交付及退費政策區 ==================== -->
+<!-- ==================== 交付及退費政策區 ==================== -->
 <div class="section-title">平台規範與政策</div>
 <div class="policy-accordion" id="policyAccordion">
 <button class="policy-trigger" onclick="togglePolicy()">
@@ -455,4 +451,5 @@ letter-spacing: 0.5px;
 <li><strong>非可歸責於客戶之取消（如夥伴臨時有事、天災）：</strong> 平台將協助安排改期，若客戶不願改期，平台將於 3 個工作天內主動辦理全額退費。</li>
 <li><strong>客戶主動取消：</strong>
 <ul>
-<li>若於約定服務時間 <strong>一個禮拜前</strong> 取消，
+<li>若於約定服務時間 <strong>一個禮拜前</strong> 取消，平台扣除必要之金流手續費後退還餘額。</li>
+<li>若於 <strong>一個禮拜內</strong> 臨時取消，依平台守則將沒收訂金/服務費用，以補償出勤夥
