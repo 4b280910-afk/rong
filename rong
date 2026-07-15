@@ -233,7 +233,7 @@ font-size: 14px;
 font-weight: 600;
 }
 
-/* ==================== 交付及退費政策 樣式 (優化版) ==================== */
+/* ==================== 交付及退費政策 新增與修正樣式 ==================== */
 .policy-accordion {
 margin-top: 15px;
 background: rgba(255, 255, 255, 0.02);
@@ -281,7 +281,7 @@ color: #8e8e9c;
 transition: transform 0.3s ease;
 }
 
-/* 折疊內容核心（改用 height 動態控制，速度更絲滑） */
+/* 摺疊內容基礎樣式：使用 height 動態控制以確保過渡平滑且不卡頓 */
 .policy-content {
 height: 0;
 overflow: hidden;
@@ -327,7 +327,7 @@ margin-bottom: 6px;
 color: #ffffff;
 }
 
-/* 箭頭旋轉狀態 */
+/* 展開狀態旋轉箭頭 */
 .policy-accordion.active .arrow-icon {
 transform: rotate(180deg);
 }
@@ -452,4 +452,46 @@ letter-spacing: 0.5px;
 <li><strong>客戶主動取消：</strong>
 <ul>
 <li>若於約定服務時間 <strong>一個禮拜前</strong> 取消，平台扣除必要之金流手續費後退還餘額。</li>
-<li>若於 <strong>一個禮拜內</strong> 臨時取消，依平台守則將沒收訂金/服務費用，以補償出勤夥
+<li>若於 <strong>一個禮拜內</strong> 臨時取消，依平台守則將沒收訂金/服務費用，以補償出勤夥伴已付出之排班與交通預備成本。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>交易糾紛與申訴管道：</strong>
+<ul>
+<li>本平台設有專屬客戶服務管道（LINE官方帳號客服）。若客戶認為服務未達預期或有任何不符之處，可於服務結束後 24 小時內提出申訴。</li>
+<li>平台客服將於收到申訴後 48 小時內完成事實釐清。若確認夥伴未依約履行（如遲到、早退、態度惡劣），平台將依比例或全額退款，並直接從金流系統退刷至客戶原支付信用卡或帳戶。</li>
+</ul>
+</li>
+</ol>
+
+</div>
+</div>
+</div>
+
+<!-- 頁尾 -->
+<div class="footer">
+© 2026 閒人案內所. All Rights Reserved.
+</div>
+
+</div>
+
+<!-- ==================== JS 控制滑動折疊選單 ==================== -->
+<script>
+function togglePolicy() {
+const accordion = document.getElementById('policyAccordion');
+const content = accordion.querySelector('.policy-content');
+
+accordion.classList.toggle('active');
+
+if (accordion.classList.contains('active')) {
+// 精準、即時獲取實際內文高度，展開動畫毫無遲滯
+content.style.height = content.scrollHeight + "px";
+} else {
+content.style.height = "0px";
+}
+}
+</script>
+
+</body>
+</html>
