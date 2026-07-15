@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>閒人案內所｜傳送門</title>
+<style>
+* {
+box-sizing: border-box;
+margin: 0;
+padding: 0;
+font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Microsoft JhengHei", sans-serif;
+}
+
+body {
+background: linear-gradient(135deg, #121214 0%, #1a1a24 100%);
+color: #ffffff;
+min-height: 100vh;
+display: flex;
+justify-content: center;
+align-items: flex-start;
+padding: 40px 20px;
+overflow-x: hidden;
+position: relative;
+}
+
+/* 背景微光裝飾 */
+body::before {
+content: '';
+position: absolute;
+top: -10%;
+left: -10%;
+width: 50%;
+height: 50%;
+background: radial-gradient(circle, rgba(138, 75, 245, 0.15) 0%, transparent 70%);
+z-index: 0;
+pointer-events: none;
+}
+
+body::after {
+content: '';
+position: absolute;
+bottom: -10%;
+right: -10%;
+width: 50%;
+height: 50%;
+background: radial-gradient(circle, rgba(235, 94, 40, 0.1) 0%, transparent 70%);
+z-index: 0;
+pointer-events: none;
+}
+
+.container {
+width: 100%;
+max-width: 480px;
+text-align: center;
+z-index: 1;
+position: relative;
+}
+
+/* 標頭區塊 */
+.header {
+margin-bottom: 35px;
+}
+
+.logo-area {
+width: 80px;
+height: 80px;
+background: linear-gradient(135deg, #8a4bf5, #eb5e28);
+border-radius: 50%;
+margin: 0 auto 15px;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 36px;
+box-shadow: 0 8px 24px rgba(138, 75, 245, 0.3);
+}
+
+.title {
+font-size: 24px;
+font-weight: 700;
+letter-spacing: 1px;
+margin-bottom: 8px;
+background: linear-gradient(to right, #ffffff, #e0e0e0);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+font-size: 14px;
+color: #9999a3;
+font-weight: 300;
+}
+
+/* 分組標題 */
+.section-title {
+font-size: 13px;
+text-transform: uppercase;
+letter-spacing: 2px;
+color: #6c6c7a;
+margin: 25px 0 12px;
+text-align: left;
+padding-left: 5px;
+font-weight: 600;
+}
+
+/* 連結列表 */
+.links-group {
+display: flex;
+flex-direction: column;
+gap: 14px;
+margin-bottom: 10px;
+}
+
+/* 萬用按鈕樣式 */
+.link-card {
+display: flex;
+align-items: center;
+padding: 16px 20px;
+background: rgba(255, 255, 255, 0.04);
+border: 1px solid rgba(255, 255, 255, 0.08);
+border-radius: 16px;
+text-decoration: none;
+color: #ffffff;
+transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+position: relative;
+overflow: hidden;
+backdrop-filter: blur(10px);
+-webkit-backdrop-filter: blur(10px);
+}
+
+.link-card:active, .link-card:hover {
+background: rgba(255, 255, 255, 0.09);
+border-color: rgba(255, 255, 255, 0.2);
+transform: translateY(-2px);
+box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* 核心按鈕高亮 */
+.link-card.primary {
+border-color: rgba(138, 75, 245, 0.4);
+background: linear-gradient(90deg, rgba(138, 75, 245, 0.1) 0%, rgba(255, 255, 255, 0.03) 100%);
+}
+.link-card.primary:active, .link-card.primary:hover {
+border-color: rgba(138, 75, 245, 0.8);
+box-shadow: 0 6px 20px rgba(138, 75, 245, 0.15);
+}
+
+.link-icon {
+font-size: 22px;
+margin-right: 15px;
+width: 30px;
+text-align: center;
+display: flex;
+justify-content: center;
+align-items: center;
+}
+
+.link-content {
+text-align: left;
+flex-grow: 1;
+}
+
+.link-title {
+font-size: 16px;
+font-weight: 600;
+margin-bottom: 2px;
+}
+
+.link-desc {
+font-size: 12px;
+color: #8e8e9c;
+}
+
+/* 限出租者標籤 */
+.badge {
+font-size: 10px;
+padding: 3px 8px;
+border-radius: 20px;
+font-weight: 600;
+margin-left: 10px;
+text-transform: uppercase;
+}
+.badge-warning {
+background-color: rgba(235, 94, 40, 0.2);
+color: #ff8a5c;
+border: 1px solid rgba(235, 94, 40, 0.3);
+}
+
+/* 專人聯絡雙欄排版 */
+.contact-grid {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 12px;
+margin-top: 5px;
+}
+
+.contact-card {
+display: flex;
+flex-direction: column;
+align-items: center;
+padding: 18px 10px;
+background: rgba(255, 255, 255, 0.03);
+border: 1px solid rgba(255, 255, 255, 0.06);
+border-radius: 16px;
+text-decoration: none;
+color: #ffffff;
+transition: all 0.2s ease;
+backdrop-filter: blur(10px);
+-webkit-backdrop-filter: blur(10px);
+}
+
+.contact-card:active, .contact-card:hover {
+background: rgba(255, 255, 255, 0.08);
+border-color: rgba(255, 255, 255, 0.15);
+transform: translateY(-2px);
+}
+
+.contact-avatar {
+width: 46px;
+height: 46px;
+border-radius: 50%;
+background: #2a2a35;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 20px;
+margin-bottom: 10px;
+border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.contact-name {
+font-size: 14px;
+font-weight: 600;
+}
+
+/* ==================== 交付及退費政策 新增樣式 ==================== */
+.policy-accordion {
+margin-top: 15px;
+background: rgba(255, 255, 255, 0.02);
+border: 1px solid rgba(255, 255, 255, 0.05);
+border-radius: 16px;
+overflow: hidden;
+backdrop-filter: blur(10px);
+-webkit-backdrop-filter: blur(10px);
+}
+
+.policy-trigger {
+width: 100%;
+display: flex;
+align-items: center;
+justify-content: space-between;
+padding: 16px 20px;
+background: transparent;
+border: none;
+color: #ffffff;
+cursor: pointer;
+font-size: 15px;
+font-weight: 600;
+text-align: left;
+transition: background 0.3s;
+}
+
+.policy-trigger:hover {
+background: rgba(255, 255, 255, 0.03);
+}
+
+.policy-trigger-left {
+display: flex;
+align-items: center;
+gap: 12px;
+}
+
+.policy-icon {
+font-size: 20px;
+}
+
+.arrow-icon {
+font-size: 12px;
+color: #8e8e9c;
+transition: transform 0.3s ease;
+}
+
+/* 折疊內容 */
+.policy-content {
+max-height: 0;
+overflow: hidden;
+transition: max-height 0.3s ease-out;
+text-align: left;
+background: rgba(0, 0, 0, 0.15);
+}
+
+.policy-inner-scroll {
+padding: 0 20px 24px;
+font-size: 13.5px;
+color: #c5c5d2;
+line-height: 1.6;
+}
+
+.policy-inner-scroll h3 {
+font-size: 14.5px;
+color: #ffffff;
+margin: 20px 0 10px 0;
+border-left: 3px solid #8a4bf5;
+padding-left: 8px;
+font-weight: 600;
+}
+
+.policy-inner-scroll h3:first-of-type {
+margin-top: 10px;
+}
+
+.policy-inner-scroll p {
+margin-bottom: 8px;
+}
+
+.policy-inner-scroll ol, .policy-inner-scroll ul {
+padding-left: 20px;
+margin-bottom: 12px;
+}
+
+.policy-inner-scroll li {
+margin-bottom: 6px;
+}
+
+.policy-inner-scroll strong {
+color: #ffffff;
+}
+
+/* 展開狀態 class (由 JS 控制) */
+.policy-accordion.active .arrow-icon {
+transform: rotate(180deg);
+}
+
+.policy-accordion.active .policy-content {
+max-height: 1200px; /* 給予足夠容納內容的最大高度 */
+transition: max-height 0.4s ease-in;
+}
+
+.footer {
+margin-top: 50px;
+font-size: 11px;
+color: #4e4e5a;
+letter-spacing: 0.5px;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<!-- 標頭 -->
+<div class="header">
+<div class="logo-area">👻</div>
+<h1 class="title">閒人案內所</h1>
+<p class="subtitle">歡迎來到生活服務與陪伴媒合傳送門</p>
+</div>
+
+<!-- 核心服務區 -->
+<div class="section-title">核心服務與社群</div>
+<div class="links-group">
+
+<a href="https://line.me/ti/g2/HjSXyaP1srrEd-vHV9h9uxaHtc4Q-NC4Z3VsXg?utm_source=invitation&utm_medium=link_copy&utm_campaign=default" class="link-card primary" target="_blank">
+<div class="link-icon">🤝</div>
+<div class="link-content">
+<div class="link-title">求租 ． 出租媒合</div>
+<div class="link-desc">尋找陪伴服務，或上架出租您的時間</div>
+</div>
+</a>
+
+<a href="https://line.me/ti/g2/wxs8HU9a3dQJKFlBm1k-2qEYB3hPhIGrlFi6Ig?utm_source=invitation&utm_medium=link_copy&utm_campaign=default" class="link-card" target="_blank">
+<div class="link-icon">📞</div>
+<div class="link-content">
+<div class="link-title">招待所 ｜ 電話專用</div>
+<div class="link-desc">專供語音聯絡與即時招待諮詢</div>
+</div>
+</a>
+
+<a href="https://line.me/ti/g2/neX2NWHUb5KNngE6IKt7qj_1jlHjYuUON-k85w?utm_source=invitation&utm_medium=link_copy&utm_campaign=default" class="link-card" target="_blank">
+<div class="link-icon">💬</div>
+<div class="link-content">
+<div class="link-title">閒人聊天室 👻</div>
+<div class="link-desc">日常閒聊、交流與找尋同好的溫馨角落</div>
+</div>
+</a>
+
+<a href="https://line.me/ti/g2/NHXeqbaUztcj7Hs_c8aXZWObCMAvAZoB2kAACQ?utm_source=invitation&utm_medium=link_copy&utm_campaign=default" class="link-card" target="_blank">
+<div class="link-icon">💼</div>
+<div class="link-content" style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
+<div>
+<div class="link-title">會議室</div>
+<div class="link-desc">內部討論與行政通知專區</div>
+</div>
+<span class="badge badge-warning">限出租者</span>
+</div>
+</a>
+
+</div>
+
+<!-- 專人聯絡區 -->
+<div class="section-title">一對一 專人聯絡</div>
+<div class="contact-grid">
+
+<a href="https://line.me/ti/p/mR19KggePp" class="contact-card" target="_blank">
+<div class="contact-avatar">👨‍💼</div>
+<div class="contact-name">聯絡所長</div>
+</a>
+
+<a href="https://line.me/ti/p/L1iM3COUPl" class="contact-card" target="_blank">
+<div class="contact-avatar">👩‍💼</div>
+<div class="contact-name">聯絡管管</div>
+</a>
+
+</div>
+
+<!-- ==================== 新增：交付及退費政策區 ==================== -->
+<div class="section-title">平台規範與政策</div>
+<div class="policy-accordion" id="policyAccordion">
+<button class="policy-trigger" onclick="togglePolicy()">
+<div class="policy-trigger-left">
+<span class="policy-icon">📋</span>
+<span>交付及退費政策</span>
+</div>
+<span class="arrow-icon">▼</span>
+</button>
+
+<div class="policy-content">
+<div class="policy-inner-scroll">
+
+<h3>一、 服務預約與建立服務之 SOP</h3>
+<ol>
+<li><strong>客戶線上預約：</strong> 客戶透過官方管道諮詢，並選擇所需的生活陪伴項目（如：探店飯友、遊戲陪玩、語意傾聽）。</li>
+<li><strong>雙方合意與守則確認：</strong> 平台提供詳細價目表與《服務守則》（內含：嚴禁肢體接觸、車內禁菸、違規將立即終止服務等規範）。客戶確認同意後，方可進入付款程序。</li>
+<li><strong>金流支付（訂金/全額）：</strong> 客戶透過金流系統支付服務費用（或支付 30% 訂金+車資）。付款完成後，系統正式建立訂單並鎖定夥伴出勤時間。</li>
+<li><strong>平台指派與服務履行：</strong> 平台指派陪伴夥伴依約前往指定公共場所（如餐廳、咖啡廳）履行實體陪伴服務，或於線上進行陪玩與語音互動。</li>
+<li><strong>服務確認與結案：</strong> 服務完成後，夥伴與客戶互相回報。平台於後台對帳系統標記「服務完成」，案件結案。</li>
+</ol>
+
+<h3>二、 最長預付期</h3>
+<ul>
+<li><strong>最長預付期限：</strong> 本平台之服務預約，最長預付期以「1個月（30天）」為限。</li>
+<li><strong>控管機制：</strong> 客戶下單預約之時間，僅能選擇自付款日起算 30 天內之檔期，不接受超過 30 天以上之遠期預約，以降低預收款項之延遲交付風險。</li>
+</ul>
+
+<h3>三、 服務交付政策 (Delivery & Refund Policy)</h3>
+<p>為保障消費者權益並防範交易糾紛，本平台建立以下「服務交付與退款退費標準」：</p>
+<ol>
+<li><strong>服務履行確認（完成交付）：</strong>
+<ul>
+<li><strong>線下陪同（如探店、飯友）：</strong> 服務當日由出勤夥伴與客戶於約定地點會合。服務完成時，夥伴需於工作系統回報，平台亦會同步向客戶確認。若服務當日結束後 24 小時內無任何爭議回報，即視為「服務已完整交付」。</li>
+<li><strong>線上服務（如陪玩、掛睡）：</strong> 於約定之線上時段完成語音或遊戲陪伴後，24 小時內無爭議回報即視為完成交付。</li>
+</ul>
+</li>
+<li><strong>退費與改期規範（特殊情況處置）：</strong>
+<ul>
+<li><strong>非可歸責於客戶之取消（如夥伴臨時有事、天災）：</strong> 平台將協助安排改期，若客戶不願改期，平台將於 3 個工作天內主動辦理全額退費。</li>
+<li><strong>客戶主動取消：</strong>
+<ul>
+<li>若於約定服務時間 <strong>一個禮拜前</strong> 取消，
